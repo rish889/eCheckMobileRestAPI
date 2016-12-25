@@ -1,0 +1,12 @@
+mydb:
+  image: mysql:latest
+  environment:
+    MYSQL_DATABASE: rish889DB
+    MYSQL_ROOT_PASSWORD: root
+myrestapi:
+  image: rish889/e-check-mobile-rest-api
+  links:
+    - mydb:rish889mysql
+  ports:
+    - 8080:8080
+

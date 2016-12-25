@@ -11,10 +11,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @EnableJpaRepositories("hello")
 @EntityScan("hello")
+@RestController
+
 public class ECheckMobileRestApiApplication {
 
     private static final Logger log = LoggerFactory.getLogger(ECheckMobileRestApiApplication.class);
@@ -40,22 +44,13 @@ public class ECheckMobileRestApiApplication {
                 log.info(customer.toString());
             }
             log.info("");
-
-            // fetch an individual customer by ID
-            Customer customer = repository.findOne(1L);
-            log.info("Customer found with findOne(1L):");
-            log.info("--------------------------------");
-            log.info(customer.toString());
-            log.info("");
-
-            // fetch customers by last name
-            log.info("Customer found with findByLastName('Bauer'):");
-            log.info("--------------------------------------------");
-            for (Customer bauer : repository.findByLastName("Bauer")) {
-                log.info(bauer.toString());
-            }
-            log.info("");
         };
+    }
+
+    @Bean
+    @RequestMapping("/")
+    public String getRaces(CustomerRepository repository) {
+        return repository.findAll().toString();
     }
 
 }
