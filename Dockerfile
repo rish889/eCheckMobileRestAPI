@@ -18,4 +18,4 @@ RUN ["mvn", "verify"]
 RUN ["mvn", "package"]
 
 EXPOSE 8080
-CMD src/main/resources/scripts/wait-for-it.sh rish889mysql:3306 && /usr/lib/jvm/java-8-openjdk-amd64/bin/java -jar target/eCheckMobileRestAPI-0.0.1-SNAPSHOT.jar
+CMD src/main/resources/scripts/wait-for-it.sh rish889mysql:3306 && /usr/lib/jvm/java-8-openjdk-amd64/bin/java -jar -Dspring.profiles.active=mysql target/eCheckMobileRestAPI-0.0.1-SNAPSHOT.jar
